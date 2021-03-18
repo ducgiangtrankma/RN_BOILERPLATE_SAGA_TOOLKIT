@@ -5,6 +5,7 @@ import SignIn from '../features/Authentication/SignIn';
 import Home from '../features/Home/Home';
 import Setting from '../features/Setting/Setting';
 import DetailHome from '../features/DetailHome/DetailHome';
+import DetailSetting from '../features/DetailHome/DetailSetting';
 const Stack = createStackNavigator();
 const Auth = () => {
   return (
@@ -39,6 +40,11 @@ const SettingTab = () => {
       <Stack.Screen
         name="Setting"
         component={Setting}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SettingDetail"
+        component={DetailSetting}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

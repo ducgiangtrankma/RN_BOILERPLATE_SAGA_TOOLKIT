@@ -1,10 +1,15 @@
 import React from 'react';
-import {Text, SafeAreaView} from 'react-native';
+import {Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
-export default function Setting(props) {
+export default function Setting({props, navigation}) {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Setting</Text>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('SettingDetail');
+        }}>
+        <Text>Setting</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
