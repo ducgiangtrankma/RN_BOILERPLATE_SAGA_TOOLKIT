@@ -1,14 +1,15 @@
-import React, {useState, useRef} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import React, {useState, useRef, useCallback} from 'react';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import {styles} from './styles';
-import {SupperAler} from '../../../components';
+import {SupperAlert} from '../../../components';
 export default function DetailSetting({props, navigation}) {
   console.log('Re-render');
+  const [messag, setMesage] = useState('a');
+  const [count, setCount] = useState(1);
   const modal = useRef();
-  const backHome = () => {
+  const backHome = useCallback(() => {
     navigation.goBack();
-  };
-
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={backHome}>
@@ -16,18 +17,25 @@ export default function DetailSetting({props, navigation}) {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
+          console.log(modal);
+          modal.current.test();
           modal.current.openModal();
         }}>
         <Text> SHOW</Text>
       </TouchableOpacity>
-      <SupperAler
-        isSucces={true}
+      <Text>{count}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setCount(count + 1);
+        }}>
+        <Text>+</Text>
+      </TouchableOpacity>
+      <SupperAlert
+        isSuccess={true}
         ref={modal}
         title="Thành công"
         message="Cập nhật thành công"
-        onClose={() => {
-          navigation.goBack();
-        }}
+        onClose={backHome}
       />
     </View>
   );

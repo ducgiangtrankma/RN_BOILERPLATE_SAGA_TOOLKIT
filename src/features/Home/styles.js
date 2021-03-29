@@ -4,8 +4,8 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     flex: 1,
   },
   btnTest: {
@@ -16,4 +16,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'red',
   },
+  dropDown: {
+    marginTop: 20,
+    borderWidth: 0,
+    borderBottomWidth: 1,
+  },
+  titleDropdown: {left: 0, top: -15},
 });

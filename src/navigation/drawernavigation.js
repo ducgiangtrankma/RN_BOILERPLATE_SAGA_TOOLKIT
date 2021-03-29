@@ -17,7 +17,7 @@ const DrawerCustom = ({navigation}) => {
       initialRouteName="MenuTab"
       drawerContent={(props) => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name="Home" component={TabCustom} />
-      <Drawer.Screen name="Detai Home" component={DetaiHome} />
+      <Drawer.Screen name="Detail Home" component={DetaiHome} />
     </Drawer.Navigator>
   );
 };

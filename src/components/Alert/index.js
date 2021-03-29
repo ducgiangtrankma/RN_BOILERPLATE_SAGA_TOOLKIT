@@ -5,27 +5,32 @@ import LottieView from 'lottie-react-native';
 import styles from './styles';
 import PropTypes from 'prop-types';
 import {lotties} from '../../assets/lottie';
+
 const SupperAlert = forwardRef((props, ref) => {
-  const {title, message, isSucces, onClose} = props;
+  console.log('Re-render alert');
+  const {title, message, isSuccess, onClose} = props;
   const [isShow, setIsShow] = useState(false);
   useImperativeHandle(ref, () => ({
-    closeModal() {
-      setIsShow(false);
-    },
-    openModal() {
-      setIsShow(true);
+    closeModal,
+    openModal,
+    test: () => {
+      console.log('a');
     },
   }));
+  const closeModal = () => setIsShow(false);
+  const openModal = () => setIsShow(true);
 
   return (
     <Modal
+      ref={ref}
+      {...props}
       width={0.5}
       height={230}
       onDismiss={() => {
-        ref.current.closeModal();
+        ref?.current.closeModal();
       }}
       onTouchOutside={() => {
-        ref.current.closeModal();
+        ref?.current.closeModal();
       }}
       swipeDirection="down"
       // onSwipeOut={() => close()}
@@ -37,7 +42,7 @@ const SupperAlert = forwardRef((props, ref) => {
         </Text>
         <LottieView
           style={styles.icon}
-          source={isSucces ? lotties.success : lotties.errors}
+          source={isSuccess ? lotties.success : lotties.errors}
           autoPlay
           loop={false}
         />
@@ -45,15 +50,15 @@ const SupperAlert = forwardRef((props, ref) => {
         <TouchableOpacity
           onPress={() => {
             onClose();
-            ref.current.closeModal();
+            ref?.current.closeModal();
           }}
           style={[
             styles.button,
             // eslint-disable-next-line react-native/no-inline-styles
-            {backgroundColor: isSucces ? '#7ED321' : 'red'},
+            {backgroundColor: isSuccess ? '#7ED321' : 'red'},
           ]}>
           <Text style={styles.txtButton}>
-            {isSucces ? 'Tiếp tục' : 'Thử lại'}
+            {isSuccess ? 'Tiếp tục' : 'Thử lại'}
           </Text>
         </TouchableOpacity>
       </ModalContent>
@@ -61,17 +66,15 @@ const SupperAlert = forwardRef((props, ref) => {
   );
 });
 SupperAlert.propTypes = {
-  isShow: PropTypes.bool,
   isSucces: PropTypes.bool,
   title: PropTypes.string,
   message: PropTypes.string,
   onClose: PropTypes.func,
 };
 SupperAlert.defaultProps = {
-  isShow: false,
   isSucces: true,
   title: 'Tiêu đề',
   message: 'Thông báo',
   onClose: () => {},
 };
-export default SupperAlert;
+export default React.memo(SupperAlert);
